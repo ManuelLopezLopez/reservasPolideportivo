@@ -112,7 +112,7 @@ if ($usuario)  {
 			$this->seguridad->errorAccesoNoPermitido();
 		}
 	}
-  public function insertarInstalacion()
+  	public function insertarInstalacion()
 	{
 
 	if ($this->seguridad->haySesionIniciada()) {
@@ -157,7 +157,7 @@ if ($usuario)  {
     $this->seguridad->errorAccesoNoPermitido();
     }
   }
-  public function borrarInstalacion()
+ 	 public function borrarInstalacion()
   {
     if ($this->seguridad->haySesionIniciada())  {
       // Recuperamos el id de la instalacion
@@ -218,26 +218,26 @@ if ($usuario)  {
 
   			// Vamos a procesar el formulario de modificación de incidencias
   			// Primero, recuperamos todos los datos del formulario
-        $Id = $_REQUEST["Id"];
+       			$Id = $_REQUEST["Id"];
   			$Email = $_REQUEST["Email"];
   			$Password = $_REQUEST["Password"];
   			$Nombre = $_REQUEST["Nombre"];
   			$Apellido1 = $_REQUEST["Apellido1"];
-        $Apellido2 = $_REQUEST["Apellido2"];
+      			$Apellido2 = $_REQUEST["Apellido2"];
   			$Dni = $_REQUEST["Dni"];
   			$tipo = $_REQUEST["tipo"];
-        $Estado = $_REQUEST["Estado"];
+        		$Estado = $_REQUEST["Estado"];
 
 
   			// Lanzamos el UPDATE contra la base de datos.
   			$result = $this->usuarios->update($Id,$Email, $Password, $Nombre, $Apellido1,$Apellido2,$Dni,$tipo,$Estado);
 
-        $data['listaUsuarios'] = $this->usuarios->getAll();
-        $this->vista->mostrar("usuarios/listaUsuarios", $data);
-        } else {
-        $this->seguridad->errorAccesoNoPermitido();
-        }
-      }
+       			 $data['listaUsuarios'] = $this->usuarios->getAll();
+       			 $this->vista->mostrar("usuarios/listaUsuarios", $data);
+        			} else {
+      				  $this->seguridad->errorAccesoNoPermitido();
+      				  }
+      			}
       public function modificarInstalaciones()
       {
         if ($this->seguridad->haySesionIniciada()) {
