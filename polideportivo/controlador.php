@@ -3,12 +3,12 @@
  include_once("modelos/usuarios.php");
  // include_once("modelos/reserva.php");
  include_once("modelos/instalacion.php");
- include_once("modelos/horarioInstalacion.php");
+ //include_once("modelos/horarioInstalacion.php");
  include_once("modelos/seguridad.php");
 class Controlador
 {
 
-	private $vista, $usuarios,$instalacion,$horarioInstalacion;
+	private $vista, $usuarios,$instalacion;
   //, $reserva,
 
 	/**
@@ -21,7 +21,7 @@ class Controlador
     $this->seguridad = new seguridad();
 	  // $this->reserva = new reserva();
 	  $this->instalacion = new instalacion();
-		$this->horarioInstalacion = new horarioInstalacion();
+	//	$this->horarioInstalacion = new horarioInstalacion();
 
 	}
 
@@ -68,12 +68,28 @@ if ($usuario)  {
 		$data['listaUsuarios'] = $this->usuarios->getAll();
 		$this->vista->mostrar("usuarios/listaUsuarios", $data);
 	}
+  public function listaInstalacion()
+  {
+    $data['listaInstalacion'] = $this->instalacion->getAll();
+    $this->vista->mostrar("instalacion/listaInstalacion", $data);
+  }
   public function formularioInsertarUsuarios()
 	{
 		if ($this->seguridad->haySesionIniciada()) {
 
 			$data['listaUsuarios'] = $this->usuarios->getAll();
 			$this->vista->mostrar('usuarios/formularioInsertarUsuarios', $data);
+		} else {
+			$this->seguridad->errorAccesoNoPermitido();
+
+		}
+	}
+  public function formularioInsertarInstalacion()
+	{
+		if ($this->seguridad->haySesionIniciada()) {
+
+			$data['listaInstalacion'] = $this->instalacion->getAll();
+			$this->vista->mostrar('instalacion/formularioInsertarInstalacion', $data);
 		} else {
 			$this->seguridad->errorAccesoNoPermitido();
 
@@ -112,7 +128,7 @@ if ($usuario)  {
 			$this->seguridad->errorAccesoNoPermitido();
 		}
 	}
-  	public function insertarInstalacion()
+  public function insertarInstalacion()
 	{
 
 	if ($this->seguridad->haySesionIniciada()) {
@@ -157,25 +173,25 @@ if ($usuario)  {
     $this->seguridad->errorAccesoNoPermitido();
     }
   }
- 	 public function borrarInstalacion()
-  {
-    if ($this->seguridad->haySesionIniciada())  {
-      // Recuperamos el id de la instalacion
-      $IdInstalacion = $_REQUEST["IdInstalacion"];
-      // Eliminamos el  de la BD
-      $result = $this->instalacion->delete($IdInstalacion);
-      if ($result == 0) {
-        $data['msjError'] = "Ha ocurrido un error al borrar la instalaicon. Por favor, inténtelo de nuevo";
-      } else {
-        $data['msjInfo'] = "Usuario borrado con éxito";
-      }
-      // Mostramos la lista de usuarios actualizada
-      $data['listaInstalacion'] = $this->instalacion->getAll();
-      $this->vista->mostrar("instalacion/listaInstalacion", $data);
-    } else {
-    $this->seguridad->errorAccesoNoPermitido();
-    }
-  }
+  public function borrarInstalacion()
+	{
+		if ($this->seguridad->haySesionIniciada()) {
+			// Recuperamos el id del libro
+			$IdInstalacion = $_REQUEST["IdInstalacion"];
+			// Eliminamos el libro de la BD
+			$result = $this->instalacion->delete($IdInstalacion);
+			if ($result == 0) {
+				// Error al borrar. Enviamos el código -1 al JS
+				echo "-1";
+			}
+			else {
+				// Borrado con éxito. Enviamos el id del libro a JS
+				echo $IdInstalacion;
+			}
+		} else {
+			echo "-1";
+		}
+	}
 
   /**
    * Muestra el formulario de modificación de los usuarios
@@ -202,7 +218,7 @@ if ($usuario)  {
       $IdInstalacion = $_REQUEST["IdInstalacion"];
       $data['instalacion'] = $this->instalacion->get($IdInstalacion);
 
-      /
+
       $this->vista->mostrar('instalacion/formularioModificarInstalaciones', $data);
     } else {
     $this->seguridad->errorAccesoNoPermitido();
@@ -218,26 +234,26 @@ if ($usuario)  {
 
   			// Vamos a procesar el formulario de modificación de incidencias
   			// Primero, recuperamos todos los datos del formulario
-       			$Id = $_REQUEST["Id"];
+        $Id = $_REQUEST["Id"];
   			$Email = $_REQUEST["Email"];
   			$Password = $_REQUEST["Password"];
   			$Nombre = $_REQUEST["Nombre"];
   			$Apellido1 = $_REQUEST["Apellido1"];
-      			$Apellido2 = $_REQUEST["Apellido2"];
+        $Apellido2 = $_REQUEST["Apellido2"];
   			$Dni = $_REQUEST["Dni"];
   			$tipo = $_REQUEST["tipo"];
-        		$Estado = $_REQUEST["Estado"];
+        $Estado = $_REQUEST["Estado"];
 
 
   			// Lanzamos el UPDATE contra la base de datos.
   			$result = $this->usuarios->update($Id,$Email, $Password, $Nombre, $Apellido1,$Apellido2,$Dni,$tipo,$Estado);
 
-       			 $data['listaUsuarios'] = $this->usuarios->getAll();
-       			 $this->vista->mostrar("usuarios/listaUsuarios", $data);
-        			} else {
-      				  $this->seguridad->errorAccesoNoPermitido();
-      				  }
-      			}
+        $data['listaUsuarios'] = $this->usuarios->getAll();
+        $this->vista->mostrar("usuarios/listaUsuarios", $data);
+        } else {
+        $this->seguridad->errorAccesoNoPermitido();
+        }
+      }
       public function modificarInstalaciones()
       {
         if ($this->seguridad->haySesionIniciada()) {
@@ -246,12 +262,11 @@ if ($usuario)  {
           $IdInstalacion = $_REQUEST["IdInstalacion"];
     			$Nombre = $_REQUEST["Nombre"];
     			$Descripcion = $_REQUEST["Descripcion"];
-    			$Imagen = $_FILES["Imagen"]["name"];
     			$Precio = $_REQUEST["Precio"];
 
 
           // Lanzamos el UPDATE contra la base de datos.
-          $result = $this->instalaciones->update($IdInstalacion, $Nombre, $Descripcion, $Imagen, $Precio);
+          $result = $this->instalacion->update($IdInstalacion, $Nombre, $Descripcion,$Precio);
 
           $data['listaInstalacion'] = $this->instalacion->getAll();
           $this->vista->mostrar("instalacion/listaInstalacion", $data);
