@@ -34,9 +34,9 @@ class instalacion{
 
           }
 
-          public function update($IdInstalacion, $Nombre, $Descripcion, $Imagen, $Precio)
+          public function update($IdInstalacion, $Nombre, $Descripcion,$Precio)
           {
-            $result=  $this->db->manipulacion("UPDATE instalacion SET  IdInstalacion = '$IdInstalacion',Nombre = '$Nombre',Descripcion = '$Descripcion',Imagen = '$Imagen',Precio = '$Precio' WHERE IdInstalacion = '$IdInstalacion'");
+            $result=  $this->db->manipulacion("UPDATE instalacion SET  IdInstalacion = '$IdInstalacion',Nombre = '$Nombre',Descripcion = '$Descripcion',Precio = '$Precio' WHERE IdInstalacion = '$IdInstalacion'");
               return $result;
 
           }
@@ -46,7 +46,7 @@ class instalacion{
            * Elimina un usuario  de la BD
 
            */
-          public function delete($Id)
+          public function delete($IdInstalacion)
           {
             $result=  $this->db->manipulacion("DELETE FROM instalacion WHERE IdInstalacion = '$IdInstalacion'");
               return $result;
