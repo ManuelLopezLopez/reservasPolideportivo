@@ -113,12 +113,7 @@ a {
 <?php
 if (isset($_SESSION['IdInstalacion'])) {
 
-
-
-
 }
-			// Comprobamos si hay una sesión iniciada o no
-
 				echo"<body>";
 				if (isset($_POST['subir'])) {
    //Recogemos el archivo enviado por el formulario
@@ -140,8 +135,8 @@ if (isset($_SESSION['IdInstalacion'])) {
         if (move_uploaded_file($temp, '/imagenes/instalaciones'.$Imagen)) {
             //Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
             chmod('imagenes/'.$Imagen, 0777);
-            //Mostramos el mensaje de que se ha subido co éxito
-            echo '<div><b>Se ha subido correctamente la imagen.</b></div>';
+            //Mostramos el mensaje de que se ha subido con éxito
+            echo '<div>Se ha subido correctamente la imagen.</div>';
             //Mostramos la imagen subida
             echo '<p><img src="././imagenes/instalaciones'.$Imagen.'"></p>';
         }
