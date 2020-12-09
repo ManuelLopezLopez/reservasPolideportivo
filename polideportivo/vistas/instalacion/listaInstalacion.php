@@ -133,8 +133,8 @@ p {
 					// Los botones "Modificar" y "Borrar" solo se muestran si hay una sesión iniciada
 					if ($this->seguridad->haySesionIniciada()) {
 						echo "<td><a href='index.php?action=formularioModificarInstalaciones&IdInstalacion=" . $instalacion->IdInstalacion . "'>Modificar</a></td>";
-						echo "<td><a href='index.php?action=borrarInstalacion&IdInstalacion=" . $instalacion->IdInstalacion . "'>Borrar Normal</a></td>";
-						echo "<td><a href='#' onclick='borrarPorAjax(" . $instalacion->IdInstalacion . ")'>Borrar por ajax</a></td>";
+						echo "<td><a href='index.php?action=borrarInstalacion&IdInstalacion=" . $instalacion->IdInstalacion . "'>Borrar</a></td>";
+
 					}
 
 			echo "</tr>";
