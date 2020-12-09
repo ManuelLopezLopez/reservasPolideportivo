@@ -116,32 +116,31 @@ if (isset($_SESSION['IdInstalacion'])) {
 }
 				echo"<body>";
 				if (isset($_POST['subir'])) {
-   //Recogemos el archivo enviado por el formulario
+   
    $Imagen = $_FILES['Imagen']['name'];
-   //Si el archivo contiene algo y es diferente de vacio
+   
    if (isset($Imagen) && $Imagen != "") {
-      //Obtenemos algunos datos necesarios sobre el archivo
+     
       $Tipo = $_FILES['archivo']['type'];
       $tamano = $_FILES['archivo']['size'];
       $temp = $_FILES['archivo']['tmp_name'];
-      //Se comprueba si el archivo a cargar es correcto observando su extensión y tamaño
+      /
      if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 2000000))) {
         echo '<div><b>Error. La extensión o el tamaño de los archivos no es correcta.<br/>
         - Se permiten archivos .gif, .jpg, .png. y de 200 kb como máximo.</b></div>';
      }
      else {
-        //Si la imagen es correcta en tamaño y tipo
-        //Se intenta subir al servidor
+        
         if (move_uploaded_file($temp, '/imagenes/instalaciones'.$Imagen)) {
-            //Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
+            
             chmod('imagenes/'.$Imagen, 0777);
-            //Mostramos el mensaje de que se ha subido con éxito
+            
             echo '<div>Se ha subido correctamente la imagen.</div>';
-            //Mostramos la imagen subida
+            
             echo '<p><img src="././imagenes/instalaciones'.$Imagen.'"></p>';
         }
         else {
-           //Si no se ha podido subir la imagen, mostramos un mensaje de error
+           
            echo '<div><b>Ocurrió algún error al subir el fichero. No pudo guardarse.</b></div>';
         }
       }
@@ -150,7 +149,7 @@ if (isset($_SESSION['IdInstalacion'])) {
 
 echo "</body>";
 
-				// Creamos el formulario con los campos de el usuario
+				
 				echo "<form action = 'index.php'enctype='multipart/form-data' method = 'post'>
 				<h1>Nuevas Instalaciones</h1>
 				<fieldset><label></label>
@@ -176,7 +175,7 @@ echo "</body>";
 						<input type='hidden' name='subir' value='Subir imagen'/>
 						</fieldset>";
 
-				// Finalizamos el formulario
+				
 				echo "<input type='hidden' name='action' value='insertarInstalacion'>
 						<button type='submit'>Insertar Instalacion</button>
 					</form>";
