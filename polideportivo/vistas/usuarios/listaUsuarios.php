@@ -85,6 +85,7 @@ p {
 <body>
 <?php
 
+
 	echo "<h1>UsuariosRegistrados</h1>";
 	// Mostramos info del usuario logueado (si hay alguno)
 	if ($this->seguridad->haySesionIniciada()) {
@@ -149,7 +150,7 @@ p {
 					if ($this->seguridad->haySesionIniciada()) {
 						echo "<td><a href='index.php?action=formularioModificarUsuarios&Id=" . $usuarios->Id . "'>Modificar</a></td>";
 						echo "<td><a href='index.php?action=borrarUsuario&Id=" . $usuarios->Id . "'>Borrar</a></td>";
-						echo "<td><a href='#' onclick='borrarPorAjax(" . $usuarios->Id . ")'>Borrar por ajax</a></td>";
+						
 					}
 
 			echo "</tr>";
@@ -158,7 +159,7 @@ p {
 	echo "</table>";
 
 
-	
+	// El botón "Nuevo Usuario" solo se muestra si hay una sesión iniciada
 	if (isset($_SESSION["Id"])) {
 		echo "<p><a class='otro' href='index.php?action=formularioInsertarUsuarios'>Nuevo Usuario</a></p>";
 	}
