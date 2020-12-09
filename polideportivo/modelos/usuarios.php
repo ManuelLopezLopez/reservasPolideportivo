@@ -3,10 +3,7 @@ include_once("DB.php");
   class usuarios {
       private $db;
 
-      /**
-       * Constructor. Establece la conexión con la BD y la guarda
-       * en una variable de la clase
-       */
+     
        public function __construct()
       {
           $this->db = new DB();
@@ -46,11 +43,11 @@ include_once("DB.php");
       public function insert($Id, $Email, $Password, $Nombre, $Apellido1,$Apellido2,$Dni,$tipo,$imagen,$Estado)
     	{
 
-    			// Ahora insertamos la incidencia en la BD
+    		
           $result = $this->db->manipulacion("INSERT INTO usuarios (Id,Email,Password,Nombre,Apellido1,Apellido2,Dni,tipo,imagen,Estado)
                           VALUES ('$Id','$Email', '$Password', '$Nombre', '$Apellido1','$Apellido2','$Dni','$tipo','$imagen','$Estado')");
           return $result;
-    			// Terminamos mostrando la lista de incidencias de este usuarios actualizada
+    			
 
     	}
 
@@ -62,10 +59,7 @@ include_once("DB.php");
       }
 
 
-      /**
-       * Elimina un usuario  de la BD
-
-       */
+      
       public function delete($Id)
       {
         $r=  $this->db->manipulacion("DELETE FROM usuarios WHERE Id = '$Id'");
@@ -74,7 +68,7 @@ include_once("DB.php");
       public function busquedaAproximada($textoBusqueda)
       {
 
-          // Buscamos los libros de la biblioteca que coincidan con el texto de búsqueda
+         
       $result = $this->db->consulta("SELECT * FROM usuarios
             WHERE usuarios.Id LIKE '%$textoBusqueda%'
             OR usuarios.Nombre LIKE '%$textoBusqueda%'
