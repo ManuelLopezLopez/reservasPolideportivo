@@ -26,11 +26,11 @@ class instalacion{
           public function insert($IdInstalacion, $Nombre, $Descripcion, $Imagen, $Precio)
           {
 
-              // Ahora insertamos la incidencia en la BD
+              
               $result = $this->db->manipulacion("INSERT INTO instalacion (IdInstalacion,Nombre,Descripcion,Imagen,Precio)
                               VALUES ('$IdInstalacion','$Nombre', '$Descripcion', '$Imagen', '$Precio')");
               return $result;
-              // Terminamos mostrando la lista de incidencias de este usuarios actualizada
+              
 
           }
 
@@ -42,10 +42,7 @@ class instalacion{
           }
 
 
-          /**
-           * Elimina un usuario  de la BD
-
-           */
+         
           public function delete($IdInstalacion)
           {
             $result=  $this->db->manipulacion("DELETE FROM instalacion WHERE IdInstalacion = '$IdInstalacion'");
