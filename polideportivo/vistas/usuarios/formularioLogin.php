@@ -6,39 +6,24 @@
 		echo "<p style='color:blue'>".$data['msjInfo']."</p>";
 	}
 ?>
-<style>
-	 .outer {
-		 position: relative;
-		 height:500px;
-     width:500px;
-		 padding-top: 100px;
-		 text-align: left;
-		 background-color:  #7CF1BD;
-	 }
-	 .inner {
-		 position: center;
-		 height:100px;
-	   width:400px;
-		 margin: 0px auto;
-		 background-color: ##7CF1BD ;
-	 }
+<link href='./estilos.css' rel='stylesheet' type='text/css'>
+<form action='index.php'>
+<div class="login">
+  <div class="login-header">
+    <h1>Login</h1>
+  </div>
+  <div class="login-form">
+    <h3>Email:</h3>
+    <input type="text"name='Email' placeholder="Email"/><br>
+    <h3>Contraseña</h3>
+    <input type="password" name='Password' placeholder="Password"/>
+    <br>
 
- </style>
+		<input type='hidden' name='action' value='procesarLogin'>
+		<br>
+		<input type='submit'>
+    <br>
+  </div>
+</div>
 
- <div class="outer">
-
-     <div class="inner">
-			 <form action='index.php'>
-
-			 Email:<input type='text' name='Email'>
-			 <br>
-			 Contraseña:<input type='password' name='Password'>
-			 <br>
-			 <input type='hidden' name='action' value='procesarLogin'>
-       <br>
-			 <input type='submit'>
-
-			</form>
-
-   </div>
- </div>
+</form>
