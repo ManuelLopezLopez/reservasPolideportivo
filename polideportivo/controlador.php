@@ -9,33 +9,25 @@ class Controlador
 {
 
 	private $vista, $usuarios,$instalacion;
-  //, $reserva,
+  
 
-	/**
-	 * Constructor. Crea las variables de los modelos y la vista
-	 */
+	
 	public function __construct()
 	{
 		$this->vista = new vista();
     $this->usuarios = new usuarios();
     $this->seguridad = new seguridad();
-	  // $this->reserva = new reserva();
 	  $this->instalacion = new instalacion();
-	//	$this->horarioInstalacion = new horarioInstalacion();
+	
 
 	}
 
-	/**
-	 * Muestra el formulario de login
-	 */
+	
 	public function mostrarFormularioLogin()
 	{
 		$this->vista->mostrar("usuarios/formularioLogin");
 	}
 
-	/**
-	 * Procesa el formulario de login e inicia la sesión
-	 */
 	public function procesarLogin()
 	{
 
@@ -46,12 +38,12 @@ class Controlador
 
 
 		$usuario = $this->usuarios->buscarUsuario($Email,$Password);
-//hacer el modelo usuarios para que recoja el valor .
+
 if ($usuario)  {
 			$this->seguridad->abrirSesion($usuario[0]);
 			$this->mostrarListaUsuarios();
 		} else {
-			// Error al iniciar la sesión
+			
 			$data['msjError'] = "Nombre de usuario o contraseña incorrectos";
 			$this->vista->mostrar("usuarios/formularioLogin", $data);
 		}
@@ -100,7 +92,7 @@ if ($usuario)  {
 
 	if ($this->seguridad->haySesionIniciada()) {
 
-			// Primero, recuperamos todos los datos del formulario
+			
 			$Id = $_REQUEST["Id"];
 			$Email = $_REQUEST["Email"];
 			$Password = $_REQUEST["Password"];
@@ -117,11 +109,11 @@ if ($usuario)  {
 
 
 
-			// Ahora insertamos el usuario en la BD
+			
 			$result = $this->usuarios->insert($Id, $Email, $Password, $Nombre, $Apellido1,$Apellido2,$Dni,$tipo,$imagen,$Estado);
 
 
-			// Terminamos mostrando la lista de usuarios actualizada
+			
 			$data['listaUsuarios'] = $this->usuarios->getAll();
 			$this->vista->mostrar("usuarios/listaUsuarios", $data);
 		} else {
@@ -133,7 +125,7 @@ if ($usuario)  {
 
 	if ($this->seguridad->haySesionIniciada()) {
 
-			// Primero, recuperamos todos los datos del formulario
+			
 			$IdInstalacion = $_REQUEST["IdInstalacion"];
 			$Nombre = $_REQUEST["Nombre"];
 			$Descripcion = $_REQUEST["Descripcion"];
@@ -141,32 +133,30 @@ if ($usuario)  {
 			$Precio = $_REQUEST["Precio"];
 
 
-			// Ahora insertamos la instalacion en la BD
+			
 			$result = $this->instalacion->insert($IdInstalacion, $Nombre, $Descripcion, $Imagen, $Precio);
 
-			// Terminamos mostrando la lista de usuarios actualizada
+			
 			$data['listaInstalacion'] = $this->instalacion->getAll();
 			$this->vista->mostrar("instalacion/listaInstalacion", $data);
 		} else {
 			$this->seguridad->errorAccesoNoPermitido();
 		}
 	}
-  /**
-   * Elimina un usuario de la base de datos
-   */
+ 
   public function borrarUsuario()
   {
     if ($this->seguridad->haySesionIniciada())  {
-      // Recuperamos el id de el usuario
+      
       $Id = $_REQUEST["Id"];
-      // Eliminamos el usuario de la BD
+      
       $result = $this->usuarios->delete($Id);
       if ($result == 0) {
         $data['msjError'] = "Ha ocurrido un error al borrar el usuario. Por favor, inténtelo de nuevo";
       } else {
         $data['msjInfo'] = "Usuario borrado con éxito";
       }
-      // Mostramos la lista de usuarios actualizada
+      
       $data['listaUsuarios'] = $this->usuarios->getAll();
       $this->vista->mostrar("usuarios/listaUsuarios", $data);
     } else {
@@ -176,16 +166,16 @@ if ($usuario)  {
   public function borrarInstalacion()
 	{
 		if ($this->seguridad->haySesionIniciada()) {
-			// Recuperamos el id del libro
+			
 			$IdInstalacion = $_REQUEST["IdInstalacion"];
-			// Eliminamos el libro de la BD
+			
 			$result = $this->instalacion->delete($IdInstalacion);
 			if ($result == 0) {
-				// Error al borrar. Enviamos el código -1 al JS
+				
 				echo "-1";
 			}
 			else {
-				// Borrado con éxito. Enviamos el id del libro a JS
+				
 				echo $IdInstalacion;
 			}
 		} else {
@@ -193,9 +183,7 @@ if ($usuario)  {
 		}
 	}
 
-  /**
-   * Muestra el formulario de modificación de los usuarios
-   */
+ 
   public function formularioModificarUsuarios()
   {
     if ($this->seguridad->haySesionIniciada()) {
@@ -225,15 +213,12 @@ if ($usuario)  {
     }
   }
 
-  	/**
-  	 * Modifica un usuario en la base de datos
-  	 */
+  	
   	public function modificarUsuarios()
   	{
   		if ($this->seguridad->haySesionIniciada()) {
 
-  			// Vamos a procesar el formulario de modificación de incidencias
-  			// Primero, recuperamos todos los datos del formulario
+  			
         $Id = $_REQUEST["Id"];
   			$Email = $_REQUEST["Email"];
   			$Password = $_REQUEST["Password"];
@@ -245,7 +230,7 @@ if ($usuario)  {
         $Estado = $_REQUEST["Estado"];
 
 
-  			// Lanzamos el UPDATE contra la base de datos.
+  			
   			$result = $this->usuarios->update($Id,$Email, $Password, $Nombre, $Apellido1,$Apellido2,$Dni,$tipo,$Estado);
 
         $data['listaUsuarios'] = $this->usuarios->getAll();
@@ -265,7 +250,7 @@ if ($usuario)  {
     			$Precio = $_REQUEST["Precio"];
 
 
-          // Lanzamos el UPDATE contra la base de datos.
+         
           $result = $this->instalacion->update($IdInstalacion, $Nombre, $Descripcion,$Precio);
 
           $data['listaInstalacion'] = $this->instalacion->getAll();
@@ -277,9 +262,9 @@ if ($usuario)  {
 
         public function buscarUsuarios()
 	{
-		// Recuperamos el texto de búsqueda de la variable de formulario
+		
 		$textoBusqueda = $_REQUEST["textoBusqueda"];
-		// Lanzamos la búsqueda y enviamos los resultados a la vista de lista de libros
+		
 		$data['listaUsuarios'] = $this->usuarios->busquedaAproximada($textoBusqueda);
 		$data['msjInfo'] = "Resultados de la búsqueda: \"$textoBusqueda\"";
 		$this->vista->mostrar("usuarios/listaUsuarios", $data);
