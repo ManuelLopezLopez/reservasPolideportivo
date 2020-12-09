@@ -175,20 +175,21 @@ if ($usuario)  {
   }
   public function borrarInstalacion()
 	{
-		if ($this->seguridad->haySesionIniciada()) {
-			// Recuperamos el id del libro
+		if ($this->seguridad->haySesionIniciada())
+    {
 			$IdInstalacion = $_REQUEST["IdInstalacion"];
-			// Eliminamos el libro de la BD
 			$result = $this->instalacion->delete($IdInstalacion);
 			if ($result == 0) {
-				// Error al borrar. Enviamos el código -1 al JS
+				//error
 				echo "-1";
 			}
 			else {
-				// Borrado con éxito. Enviamos el id del libro a JS
-				echo $IdInstalacion;
-			}
+				    //exito
+				      echo $IdInstalacion;
+			     }
+           
 		} else {
+
 			echo "-1";
 		}
 	}
@@ -288,3 +289,4 @@ if ($usuario)  {
 
 
 }
+
