@@ -1,5 +1,7 @@
 <html>
+	
 <head>
+	<meta charset="utf-8">
 <style>
 *, *:before, *:after {
   -moz-box-sizing: border-box;
@@ -164,10 +166,10 @@ echo "</body>";
 						<br>
 						<label>Descripcion:</label><input type='text' name='Descripcion'><br>
 						<label>Precio :</label>
-						<input type='radio' value='4€/h' name='Precio'>4€/hora
-						<input type='radio' value='5€/h' name='Precio' >5€/hora
-            <input type='radio' value='6€/h' name='Precio' >6€/hora
-            <input type='radio' value='7€/h' name='Precio'selected>7€/hora<br>
+						<input type='radio' value='4euros' name='Precio'>4€/hora
+						<input type='radio' value='5euros' name='Precio' >5€/hora
+            <input type='radio' value='6euros' name='Precio' >6€/hora
+            <input type='radio' value='7euros' name='Precio'selected>7€/hora<br>
 						<br>
 						</fieldset>
 						<fieldset>
