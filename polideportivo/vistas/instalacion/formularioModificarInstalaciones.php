@@ -1,6 +1,7 @@
 
 <html>
 <head>
+	<meta charset="utf-8">
 <style>
 *, *:before, *:after {
   -moz-box-sizing: border-box;
@@ -151,22 +152,22 @@ echo "
                 <label>Descripcion:</label><input type='text' name='Descripcion'value='$instalacion->Descripcion'><br>
 
                 <label>Precio:</label>
-                <input type='radio' value='4€/h'name='Precio'";
+                <input type='radio' value='4euros'name='Precio'";
                 if($instalacion->Precio == '4€/h'){
                   echo "checked";
                 }
                 echo ">4€/h
-                <input type='radio' value='5€/h'name='Precio'";
+                <input type='radio' value='5euros'name='Precio'";
                 if($instalacion->Precio == '5€/h'){
                 echo "checked";
                 }
                echo ">5€/h
-               <input type='radio' value='6€/h'name='Precio'";
+               <input type='radio' value='6euros'name='Precio'";
                if($instalacion->Precio == '6€/h'){
                  echo "checked";
                }
                echo ">6€/h
-               <input type='radio' value='7€/h'name='Precio'";
+               <input type='radio' value='7euros'name='Precio'";
                if($instalacion->Precio == '7€/h'){
                echo "checked";
                }
